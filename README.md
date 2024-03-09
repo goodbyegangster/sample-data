@@ -70,3 +70,29 @@ $ aws s3 ls --human-readable 's3://nyc-tlc/trip data/' | grep 2023-01.parquet
 ```
 
 カラムの情報は、[データ提供元（NYC.gov）サイト](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page) の `Data Dictionaries and MetaData` にある PDF ファイルを参照すること。
+
+## リスティング広告のインプレッション・ログ
+
+> s3://elasticmapreduce/samples/hive-ads/tables/impressions
+
+- hive パーティション
+- 半構造化
+- JSONL
+- 時系列
+
+```sh
+$ aws s3 --profile cdk-individual ls s3://elasticmapreduce/samples/hive-ads/tables/impressions/ | head -n 5
+                           PRE dt=2009-04-12-13-00/
+                           PRE dt=2009-04-12-13-05/
+                           PRE dt=2009-04-12-13-10/
+                           PRE dt=2009-04-12-13-15/
+                           PRE dt=2009-04-12-13-20/
+```
+
+```json
+$ aws s3 cp s3://elasticmapreduce/samples/hive-ads/tables/impressions/dt=2009-04-14-13-00/ec2-0-51-75-39.amazon.com-2009-04-14-13-00.log - | head -
+n 3
+{"number": "67714", "referrer": "barnesandnoble.com", "processId": "1731", "adId": "jHbQTXDanFeH35aWABcv8ojPmGWi3P", "browserCookie": "jierghcdpw", "userCookie": "ijQ5rO83dpwe3IJQPAfhOO9hhN4qPA", "requestEndTime": "1239714065000", "impressionId": "ujWT6KxNd4l4AC2IwcCouFciah5bHS", "userAgent": "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.1) Gecko/20090624 Firefox/3.5", "timers": {"modelLookup":"0.3242","requestTime":"0.9436"}, "threadId": "34", "ip": "49.175.133.253", "modelId": "bxxiuxduad", "hostname": "ec2-0-51-75-39.amazon.com", "sessionId": "qPw4Jnvm0sgTxwth4RtqndSBbnuGDH", "requestBeginTime": "1239714064000"}
+{"number": "92579", "referrer": "coursera.org", "processId": "1065", "adId": "k1QLH7LTw84LgVCiqJI2f0UmnE85CG", "browserCookie": "bhqcuhghei", "userCookie": "qJ8qKu8Oh5QLeBQsmr4GbFIEmuAF83", "requestEndTime": "1239714064000", "impressionId": "4gwUbsdduFM1eogBVttg110IUsJGnK", "userAgent": "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.20) Gecko/20081217 Firefox/2.0.0.20", "timers": {"modelLookup":"0.2968","requestTime":"0.9222"}, "threadId": "81", "ip": "52.144.233.240", "modelId": "bxxiuxduad", "hostname": "ec2-0-51-75-39.amazon.com", "sessionId": "GDnUUwcWed7EVDKQohvOd7DXUBVLvt", "requestBeginTime": "1239714063000"}
+{"number": "117696", "referrer": "lastwordonnothing.com", "processId": "1359", "adId": "VwDSV7xmA2Ns6CSOf3KDBKBlRVNGjl", "browserCookie": "kfrcxtpooj", "userCookie": "Uk6rKHDXWoRDuqjC0KbSo02tKiKQUs", "requestEndTime": "1239714063000", "impressionId": "XC4oxemubWvG0LVV0FCNwgLqGfBhvm", "userAgent": "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 1.1.4322; .NET CLR 2.0.50727; .NET CLR 3.0.04506.30; InfoPath.1;", "timers": {"modelLookup":"0.3824","requestTime":"0.7426"}, "threadId": "64", "ip": "52.172.179.99", "modelId": "bxxiuxduad", "hostname": "ec2-0-51-75-39.amazon.com", "sessionId": "vhwAi3xxnvp3ViaVKVch6BcqbiLfX3", "requestBeginTime": "1239714062000"}
+```
