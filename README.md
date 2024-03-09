@@ -89,7 +89,7 @@ $ aws s3 --profile cdk-individual ls s3://elasticmapreduce/samples/hive-ads/tabl
                            PRE dt=2009-04-12-13-20/
 ```
 
-```json
+```sh
 $ aws s3 cp s3://elasticmapreduce/samples/hive-ads/tables/impressions/dt=2009-04-14-13-00/ec2-0-51-75-39.amazon.com-2009-04-14-13-00.log - | head -
 n 3
 {"number": "67714", "referrer": "barnesandnoble.com", "processId": "1731", "adId": "jHbQTXDanFeH35aWABcv8ojPmGWi3P", "browserCookie": "jierghcdpw", "userCookie": "ijQ5rO83dpwe3IJQPAfhOO9hhN4qPA", "requestEndTime": "1239714065000", "impressionId": "ujWT6KxNd4l4AC2IwcCouFciah5bHS", "userAgent": "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.1) Gecko/20090624 Firefox/3.5", "timers": {"modelLookup":"0.3242","requestTime":"0.9436"}, "threadId": "34", "ip": "49.175.133.253", "modelId": "bxxiuxduad", "hostname": "ec2-0-51-75-39.amazon.com", "sessionId": "qPw4Jnvm0sgTxwth4RtqndSBbnuGDH", "requestBeginTime": "1239714064000"}
