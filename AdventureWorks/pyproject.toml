@@ -1,0 +1,13 @@
+[project]
+name = "AdventureWorks"
+version = "0.1.0"
+description = "Migration of AdventureWorks DB in SQLServer to BigQuery"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "google-cloud-bigquery>=3.27.0",
+    "google-cloud-storage>=2.19.0",
+    "pandas>=2.2.3",
+    "pyarrow>=18.1.0",
+    "pyodbc>=5.2.0",
+]

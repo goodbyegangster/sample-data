@@ -4,6 +4,10 @@
 
 [タイタニック乗船客リスト](./titanic-passengers/)
 
+## AdventureWorks
+
+[SQL Server サンプルデータベースである AdventureWorks を、BigQuery へ移行する方法](./AdventureWorks/README.md)
+
 ## AWS Cloud Front サンプル・ログ
 
 > s3://athena-examples-ap-northeast-1/cloudfront
@@ -89,11 +93,26 @@ $ aws s3 --profile <profile> ls s3://elasticmapreduce/samples/hive-ads/tables/im
                            PRE dt=2009-04-12-13-20/
 ```
 
+```sh
+$ aws s3 --profile <profile> ls --recursive --human-readable --summarize s3://elasticmapreduce/samples/hive-ads/tables/impressions/ | tail -n 3
+
+Total Objects: 1446
+   Total Size: 618.5 MiB
+```
+
 ```json
 $ aws s3 cp s3://elasticmapreduce/samples/hive-ads/tables/impressions/dt=2009-04-14-13-00/ec2-0-51-75-39.amazon.com-2009-04-14-13-00.log - | head - n 3
 {"number": "67714", "referrer": "barnesandnoble.com", "processId": "1731", "adId": "jHbQTXDanFeH35aWABcv8ojPmGWi3P", "browserCookie": "jierghcdpw", "userCookie": "ijQ5rO83dpwe3IJQPAfhOO9hhN4qPA", "requestEndTime": "1239714065000", "impressionId": "ujWT6KxNd4l4AC2IwcCouFciah5bHS", "userAgent": "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.1) Gecko/20090624 Firefox/3.5", "timers": {"modelLookup":"0.3242","requestTime":"0.9436"}, "threadId": "34", "ip": "49.175.133.253", "modelId": "bxxiuxduad", "hostname": "ec2-0-51-75-39.amazon.com", "sessionId": "qPw4Jnvm0sgTxwth4RtqndSBbnuGDH", "requestBeginTime": "1239714064000"}
 {"number": "92579", "referrer": "coursera.org", "processId": "1065", "adId": "k1QLH7LTw84LgVCiqJI2f0UmnE85CG", "browserCookie": "bhqcuhghei", "userCookie": "qJ8qKu8Oh5QLeBQsmr4GbFIEmuAF83", "requestEndTime": "1239714064000", "impressionId": "4gwUbsdduFM1eogBVttg110IUsJGnK", "userAgent": "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.20) Gecko/20081217 Firefox/2.0.0.20", "timers": {"modelLookup":"0.2968","requestTime":"0.9222"}, "threadId": "81", "ip": "52.144.233.240", "modelId": "bxxiuxduad", "hostname": "ec2-0-51-75-39.amazon.com", "sessionId": "GDnUUwcWed7EVDKQohvOd7DXUBVLvt", "requestBeginTime": "1239714063000"}
 {"number": "117696", "referrer": "lastwordonnothing.com", "processId": "1359", "adId": "VwDSV7xmA2Ns6CSOf3KDBKBlRVNGjl", "browserCookie": "kfrcxtpooj", "userCookie": "Uk6rKHDXWoRDuqjC0KbSo02tKiKQUs", "requestEndTime": "1239714063000", "impressionId": "XC4oxemubWvG0LVV0FCNwgLqGfBhvm", "userAgent": "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 1.1.4322; .NET CLR 2.0.50727; .NET CLR 3.0.04506.30; InfoPath.1;", "timers": {"modelLookup":"0.3824","requestTime":"0.7426"}, "threadId": "64", "ip": "52.172.179.99", "modelId": "bxxiuxduad", "hostname": "ec2-0-51-75-39.amazon.com", "sessionId": "vhwAi3xxnvp3ViaVKVch6BcqbiLfX3", "requestBeginTime": "1239714062000"}
+```
+
+---
+
+オブジェクトのコピー・コマンド
+
+```sh
+$ aws --profile <profile> s3 cp --recursive s3://elasticmapreduce/samples/hive-ads/tables/impressions/ s3://<target-bucket-name>/sample/
 ```
 
 ## NOAA Global Historical Climatology Network Daily (GHCN-D)
@@ -208,4 +227,18 @@ Desktop uniques
 Free sign up
 Paid conversion
 Events
+```
+
+# TPC Data
+
+```bash
+$ aws --profile <profile> s3 ls --human-readable --recursive s3://aws-data-analytics-workshops/shared_datasets/tpcparquet/
+2022-04-15 00:27:13   20.0 MiB shared_datasets/tpcparquet/dl_tpc_customer/part-00000-8a990a41-0c74-4a62-834e-8397f5cdbc4e-c000.snappy.parquet
+2022-04-15 00:27:16   15.9 MiB shared_datasets/tpcparquet/dl_tpc_customer_address/part-00000-8283c706-320e-4f66-a57f-70a1460a0b2d-c000.snappy.parquet
+2022-04-15 00:27:17   42.7 KiB shared_datasets/tpcparquet/dl_tpc_household_demographics/part-00000-aca6b874-4d62-4eda-9768-ad8ab8c5499d-c000.snappy.parquet
+2022-04-15 00:27:18    1.1 KiB shared_datasets/tpcparquet/dl_tpc_income_band/part-00000-27533284-b0c5-4d28-a709-1edcbb8a19ee-c000.snappy.parquet
+2022-04-15 00:27:13   40.8 MiB shared_datasets/tpcparquet/dl_tpc_item/part-00000-f6c9f56e-48f1-4723-8f5f-2661ff74b888-c000.snappy.parquet
+2022-04-15 00:27:13   91.1 KiB shared_datasets/tpcparquet/dl_tpc_promotion/part-00000-ebc5557f-002e-41eb-9404-24840730537c-c000.snappy.parquet
+2022-04-15 00:27:18   67.9 KiB shared_datasets/tpcparquet/dl_tpc_web_page/part-00000-99a8aa66-b914-43a1-ac15-6f6aaeade0d4-c000.snappy.parquet
+2022-04-15 00:27:13   32.4 MiB shared_datasets/tpcparquet/dl_tpc_web_sales/part-00000-80a84c73-e44c-4ff5-8f08-708765afe13d-c000.snappy.parquet
 ```

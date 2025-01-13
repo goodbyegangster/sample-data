@@ -1,0 +1,13 @@
+[SQLServer]
+SERVER = "{Windows側のIPアドレス}"
+DATABASE = "AdventureWorks2022"
+PORT = {利用する動的ポート}
+USER = "sa"
+PASSWORD = "P@ssw0rd"
+
+[GCS]
+BUCKET = "{GCS Bucket名}"
+
+[BIGQUERY]
+PROJECT = "{Google Cloud Project ID}"
+REGION = "asia-northeast1"
